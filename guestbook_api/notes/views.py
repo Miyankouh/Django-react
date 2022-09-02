@@ -1,9 +1,8 @@
-from django.shortcuts import render
+from .models import Note
 from rest_framework import viewsets
-from .models import Notes
-from .serializers import NotesSerializers
+from .serializers import NoteSerializer
 
 
 class NotesViewset(viewsets.ModelViewSet):
-    serializer_class = NotesSerializers
-    queryset = Notes.objects.all()
+    serializer_class=NoteSerializer
+    queryset=Note.objects.all()

@@ -1,6 +1,5 @@
-from xml.etree.ElementInclude import include
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path,include
 from notes.views import NotesViewset
 from rest_framework.routers import DefaultRouter
 
@@ -13,20 +12,19 @@ schema_view = get_schema_view(
    openapi.Info(
       title="Guest Book API",
       default_version='v1',
-      description="This is a guest book API",
+      description="This is a guest book API",   
    ),
    public=True,
    permission_classes=[permissions.AllowAny],
 )
 
+router=DefaultRouter()
 
-router = DefaultRouter()
-
-router.register('postes', NotesViewset)
+router.register('posts',NotesViewset)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('',include(router.urls)),
+   path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+   path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
